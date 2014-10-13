@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 
 public class MyActivity extends Activity {
-    private Button toastThis;
+    private Button toastThis; // toastes a thing
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
