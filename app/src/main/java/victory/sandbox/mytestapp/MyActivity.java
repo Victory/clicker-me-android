@@ -4,34 +4,43 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.TabHost;
 
 
 public class MyActivity extends Activity {
-    private Button toastThis; // toastes a thing
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-        final TextView helloWorldText = (TextView)findViewById(R.id.helloWorld);
-        Button clickToDo = (Button)findViewById(R.id.clickToDo);
-        clickToDo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (helloWorldText.getText().equals(getString(R.string.hello_world))) {
-                    helloWorldText.setText(getString(R.string.iLikeToClick));
-                } else {
-                    helloWorldText.setText(getString(R.string.hello_world));
-                }
-            }
-        });
+        TabHost tabHost = (TabHost)findViewById(R.id.tabHost);
+        tabHost.setup();
 
-        toastThis = (Button)findViewById(R.id.toastThis);
+        TabHost.TabSpec tabSpec = tabHost.newTabSpec("tab1");
+        tabSpec.setContent(R.id.textView);
+        tabSpec.setIndicator("First Tab");
+        tabHost.addTab(tabSpec);
+
+
+        tabSpec = tabHost.newTabSpec("tab2");
+        tabSpec.setContent(R.id.textView2);
+        tabSpec.setIndicator("Second Tab");
+        tabHost.addTab(tabSpec);
+
+        tabSpec = tabHost.newTabSpec("tab3");
+        tabSpec.setContent(R.id.textView3);
+        tabSpec.setIndicator("Third Tab");
+        tabHost.addTab(tabSpec);
+
+        /*
+        tabSpec.setContent(R.id.tab2);
+        tabSpec.setIndicator("First Tab");
+        tabSpec.setContent(R.id.tab3);
+        tabSpec.setIndicator("First Tab");
+        */
+
+
     }
 
 
@@ -48,14 +57,7 @@ public class MyActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings || super.onOptionsItemSelected(item)) {
-            return true;
-        }
-        else return false;
-    }
 
-    public void doToast(View view) {
-        String theResponse = "This is a sweet response";
-        Toast.makeText(this, theResponse, Toast.LENGTH_SHORT).show();
+        return (id == R.id.action_settings) || (super.onOptionsItemSelected(item));
     }
 }
