@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 
 public class MyActivity extends Activity {
@@ -18,10 +19,19 @@ public class MyActivity extends Activity {
         tabHost.setup();
 
         TabHost.TabSpec tabSpec = tabHost.newTabSpec("tab1");
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                Toast.makeText(
+                        getApplicationContext(),
+                        "you clicked tab " + tabId,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
         tabSpec.setContent(R.id.textView);
         tabSpec.setIndicator("First Tab");
         tabHost.addTab(tabSpec);
-
 
         tabSpec = tabHost.newTabSpec("tab2");
         tabSpec.setContent(R.id.textView2);
