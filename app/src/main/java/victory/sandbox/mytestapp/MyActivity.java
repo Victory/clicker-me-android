@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 public class MyActivity extends Activity {
 
+    boolean isFirstTabClick = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,12 @@ public class MyActivity extends Activity {
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
+
+                // ignore the initial tabClick which happens automatically
+                if (isFirstTabClick) {
+                    isFirstTabClick = false;
+                    return;
+                }
                 Toast.makeText(
                         getApplicationContext(),
                         "you clicked tab " + tabId,
