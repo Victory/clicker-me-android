@@ -42,7 +42,7 @@
                         android:layout_width="254dp"
                         android:layout_height="133dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text"
+                        android:text="@string/firstTab"
                         android:id="@+id/textView" />
                 </LinearLayout>
 
@@ -50,14 +50,22 @@
                     android:id="@+id/tab2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="40dp"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text 2"
-                        android:id="@+id/textView2" />
+                        android:text="@string/secondTabText"
+                        android:id="@+id/textView2"
+                        android:layout_marginRight="10dp" />
+
+                    <ListView
+                        android:layout_width="fill_parent"
+                        android:layout_height="359dp"
+                        android:id="@+id/listView"
+                        android:layout_gravity="center_vertical" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -70,10 +78,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Large Text 3"
+                        android:text="@string/thirdTabText"
                         android:id="@+id/textView3" />
                 </LinearLayout>
+
             </FrameLayout>
+
         </LinearLayout>
     </TabHost>
+
 </RelativeLayout>

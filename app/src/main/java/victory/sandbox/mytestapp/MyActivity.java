@@ -1,16 +1,22 @@
 package victory.sandbox.mytestapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.TabHost;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MyActivity extends Activity {
 
     boolean isFirstTabClick = true;
+    List<ListfulContent> listfulContent = new ArrayList<ListfulContent>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +57,15 @@ public class MyActivity extends Activity {
         tabSpec.setIndicator("Third Tab");
         tabHost.addTab(tabSpec);
 
-        /*
-        tabSpec.setContent(R.id.tab2);
-        tabSpec.setIndicator("First Tab");
-        tabSpec.setContent(R.id.tab3);
-        tabSpec.setIndicator("First Tab");
-        */
-
-
     }
 
+
+    private class MyListAdapter extends ArrayAdapter<ListfulContent>
+    {
+        public MyListAdapter() {
+            super(MyActivity.this, R.layout.lisful_layout, listfulContent);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
