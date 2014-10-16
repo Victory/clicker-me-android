@@ -36,10 +36,10 @@ public class MyActivity extends Activity {
         tabHost.setup();
 
         TabHost.TabSpec tabSpec = tabHost.newTabSpec("tab1");
+
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
-
                 // ignore the initial tabClick which happens automatically
                 if (isFirstTabClick) {
                     isFirstTabClick = false;
@@ -52,18 +52,13 @@ public class MyActivity extends Activity {
             }
         });
 
-        tabSpec.setContent(R.id.textView);
+        tabSpec.setContent(R.id.tab1);
         tabSpec.setIndicator("First Tab");
         tabHost.addTab(tabSpec);
 
         tabSpec = tabHost.newTabSpec("tab2");
-        tabSpec.setContent(R.id.textView2);
+        tabSpec.setContent(R.id.tab2);
         tabSpec.setIndicator("Second Tab");
-        tabHost.addTab(tabSpec);
-
-        tabSpec = tabHost.newTabSpec("tab3");
-        tabSpec.setContent(R.id.textView3);
-        tabSpec.setIndicator("Third Tab");
         tabHost.addTab(tabSpec);
 
     }

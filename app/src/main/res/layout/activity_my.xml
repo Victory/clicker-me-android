@@ -9,82 +9,74 @@
     tools:context=".MyActivity"
     android:id="@+id/myAct">
 
-    <TabHost
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/tabHost"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_height="fill_parent">
 
-        <LinearLayout
+        <TabHost
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical">
+            android:id="@+id/tabHost"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-            <TabWidget
-                android:id="@android:id/tabs"
+            <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"></TabWidget>
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-
-                <LinearLayout
-                    android:id="@+id/tab1"
+                <TabWidget
+                    android:id="@android:id/tabs"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"></TabWidget>
 
-                    <TextView
-                        android:layout_width="254dp"
-                        android:layout_height="133dp"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="@string/firstTab"
-                        android:id="@+id/textView" />
-                </LinearLayout>
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
 
-                <LinearLayout
-                    android:id="@+id/tab2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="@string/secondTabText"
-                        android:id="@+id/textView2"
-                        android:layout_marginRight="10dp" />
-
-                    <ListView
+                    <LinearLayout
+                        android:id="@+id/tab2"
                         android:layout_width="fill_parent"
-                        android:layout_height="359dp"
-                        android:id="@+id/listView"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="@string/secondTabText"
+                            android:id="@+id/textView2"
+                            android:layout_marginRight="10dp" />
 
-                <LinearLayout
-                    android:id="@+id/tab3"
-                    android:layout_width="544dp"
-                    android:layout_height="316dp"
-                    android:orientation="horizontal">
+                        <ListView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/listView"
+                            android:layout_gravity="center_vertical" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="@string/thirdTabText"
-                        android:id="@+id/textView3" />
-                </LinearLayout>
+                    </LinearLayout>
 
-            </FrameLayout>
+                    <LinearLayout
+                        android:id="@+id/tab1"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical">
 
-        </LinearLayout>
-    </TabHost>
+                        <TextView
+                            android:layout_width="254dp"
+                            android:layout_height="133dp"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="@string/firstTab"
+                            android:id="@+id/textView" />
+                    </LinearLayout>
+
+                </FrameLayout>
+
+            </LinearLayout>
+        </TabHost>
+    </LinearLayout>
 
 </RelativeLayout>
