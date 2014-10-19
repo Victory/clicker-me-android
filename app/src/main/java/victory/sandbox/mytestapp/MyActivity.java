@@ -83,7 +83,7 @@ public class MyActivity extends Activity {
             ListfulContent currentItem = listfulContent.get(ii);
             TextView name = (TextView) view.findViewById(R.id.listfulName);
             TextView info = (TextView) view.findViewById(R.id.listfulInfo);
-            name.setText(currentItem.getName());
+            name.setText("Your Name: " + currentItem.getName());
             info.setText(currentItem.getInfo());
 
             return view;
