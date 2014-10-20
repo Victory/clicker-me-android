@@ -30,7 +30,7 @@
                 <TabWidget
                     android:id="@android:id/tabs"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"></TabWidget>
+                    android:layout_height="wrap_content"/>
 
                 <FrameLayout
                     android:id="@android:id/tabcontent"
@@ -66,8 +66,8 @@
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="New Button"
-                            android:id="@+id/button"
+                            android:text="@string/clickToDo"
+                            android:id="@+id/clickToDoBtn"
                             android:layout_gravity="center_horizontal" />
                     </LinearLayout>
 

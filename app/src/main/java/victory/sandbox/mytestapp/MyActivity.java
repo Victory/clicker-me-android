@@ -2,11 +2,15 @@ package victory.sandbox.mytestapp;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -60,6 +64,54 @@ public class MyActivity extends Activity {
         tabSpec.setContent(R.id.tab2);
         tabSpec.setIndicator("Second Tab");
         tabHost.addTab(tabSpec);
+
+        final Button clickToDoBtn = (Button) findViewById(R.id.clickToDoBtn);
+        final EditText nameInput = (EditText) findViewById(R.id.nameInput);
+        final EditText infoInput = (EditText) findViewById(R.id.infoInput);
+
+
+        clickToDoBtn.setEnabled(false);
+
+        nameInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                clickToDoBtn.setEnabled(true);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+        clickToDoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = nameInput.getText().toString().trim();
+                String info = infoInput.getText().toString().trim();
+
+                if (name.isEmpty()) {
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "you must enter a name",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                ListfulContent lc = new ListfulContent(name, info);
+                listfulContent.add(lc);
+
+                nameInput.setText("");
+                infoInput.setText("");
+
+            }
+        });
 
     }
 
