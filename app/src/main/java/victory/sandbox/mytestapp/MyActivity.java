@@ -80,7 +80,9 @@ public class MyActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                clickToDoBtn.setEnabled(true);
+
+                String name = nameInput.getText().toString().trim();
+                clickToDoBtn.setEnabled(!name.isEmpty());
             }
 
             @Override
@@ -96,13 +98,6 @@ public class MyActivity extends Activity {
                 String name = nameInput.getText().toString().trim();
                 String info = infoInput.getText().toString().trim();
 
-                if (name.isEmpty()) {
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "you must enter a name",
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
                 ListfulContent lc = new ListfulContent(name, info);
                 listfulContent.add(lc);
