@@ -50,6 +50,14 @@
                             android:text="@string/firstTab"
                             android:id="@+id/textView" />
 
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:id="@+id/addImageView"
+                            android:layout_gravity="center_horizontal"
+                            android:focusableInTouchMode="true"
+                            android:src="@drawable/add_user" />
+
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

@@ -1,6 +1,7 @@
 package victory.sandbox.mytestapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ public class MyActivity extends Activity {
     boolean isFirstTabClick = true;
     List<ListfulContent> listfulContent = new ArrayList<ListfulContent>();
     ListView listfulContentView;
+    ImageView addImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,18 @@ public class MyActivity extends Activity {
         final EditText nameInput = (EditText) findViewById(R.id.nameInput);
         final EditText infoInput = (EditText) findViewById(R.id.infoInput);
 
+        addImage = (ImageView) findViewById(R.id.addImageView);
+
+
+        addImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "choose a pic"), 1);
+            }
+        });
 
         clickToDoBtn.setEnabled(false);
 
@@ -110,6 +125,14 @@ public class MyActivity extends Activity {
 
     }
 
+    public void onActivityResult (int reqCode, int resCode, Intent data) {
+        if (resCode == RESULT_OK) {
+            if (reqCode == 1) {
+                addImage.setImageURI(data.getData());
+            }
+        }
+
+    }
 
     private void populateListfulContent () {
         ListfulContent lc = new ListfulContent("Joe", "I am good a putting stuff in things");
