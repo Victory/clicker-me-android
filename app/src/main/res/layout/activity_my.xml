@@ -45,7 +45,7 @@
 
                         <TextView
                             android:layout_width="254dp"
-                            android:layout_height="133dp"
+                            android:layout_height="43dp"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="@string/firstTab"
                             android:id="@+id/textView" />
@@ -63,8 +63,7 @@
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
                             android:ems="10"
-                            android:id="@+id/nameInput"
-                            android:layout_gravity="center_horizontal" />
+                            android:id="@+id/nameInput" />
 
                         <EditText
                             android:layout_width="match_parent"

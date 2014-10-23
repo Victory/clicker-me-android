@@ -10,7 +10,5 @@
     <string name="letsToast">letsToast</string>
     <string name="title_of_game">Click My World</string>
     <string name="firstTab">Large Text</string>
-    <string name="secondTabText">Large Text 2</string>
-    <string name="thirdTabText">Large Text 3</string>
-
+    <string name="secondTabText">List of Peoples</string>
 </resources>

@@ -2,6 +2,7 @@ package victory.sandbox.mytestapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,13 +29,13 @@ public class MyActivity extends Activity {
     List<ListfulContent> listfulContent = new ArrayList<ListfulContent>();
     ListView listfulContentView;
     ImageView addImage;
+    Uri imgUri = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-        populateListfulContent();
         ArrayAdapter<ListfulContent> mla = new MyListAdapter();
         listfulContentView = (ListView) findViewById(R.id.listView);
         listfulContentView.setAdapter(mla);
@@ -113,8 +114,7 @@ public class MyActivity extends Activity {
                 String name = nameInput.getText().toString().trim();
                 String info = infoInput.getText().toString().trim();
 
-
-                ListfulContent lc = new ListfulContent(name, info);
+                ListfulContent lc = new ListfulContent(name, info, imgUri);
                 listfulContent.add(lc);
 
                 nameInput.setText("");
@@ -129,15 +129,12 @@ public class MyActivity extends Activity {
         if (resCode == RESULT_OK) {
             if (reqCode == 1) {
                 addImage.setImageURI(data.getData());
+                imgUri = data.getData();
             }
         }
 
     }
 
-    private void populateListfulContent () {
-        ListfulContent lc = new ListfulContent("Joe", "I am good a putting stuff in things");
-        listfulContent.add(lc);
-    }
     private class MyListAdapter extends ArrayAdapter<ListfulContent>
     {
         public MyListAdapter() {
@@ -153,8 +150,10 @@ public class MyActivity extends Activity {
             ListfulContent currentItem = listfulContent.get(ii);
             TextView name = (TextView) view.findViewById(R.id.listfulName);
             TextView info = (TextView) view.findViewById(R.id.listfulInfo);
+            ImageView img = (ImageView) view.findViewById(R.id.infoImg);
+            img.setImageURI(currentItem.getImgUri());
             name.setText("Your Name: " + currentItem.getName());
-            info.setText(currentItem.getInfo());
+            info.setText("Your info: " + currentItem.getInfo());
 
             return view;
         }

@@ -1,14 +1,18 @@
 package victory.sandbox.mytestapp;
 
+import android.net.Uri;
+
 /**
- * Created by user on 10/15/2014.
+ * listful content
  */
 public class ListfulContent {
     private String name, info;
+    private Uri imgUri;
 
-    ListfulContent (String name, String info) {
+    ListfulContent (String name, String info, Uri imgUri) {
         this.name = name;
         this.info = info;
+        this.imgUri = imgUri;
     }
 
     public String getName () {
@@ -18,4 +22,6 @@ public class ListfulContent {
     public String getInfo () {
         return info;
     }
+
+    public Uri getImgUri() { return imgUri; }
 }
