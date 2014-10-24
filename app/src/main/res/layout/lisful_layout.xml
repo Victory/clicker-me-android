@@ -16,21 +16,24 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:id="@+id/listfulContainer">
 
         <TextView
-            android:layout_width="205dp"
-            android:layout_height="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Name"
-            android:id="@+id/listfulName" />
+            android:id="@+id/listfulName"
+            android:layout_gravity="left" />
 
         <TextView
-            android:layout_width="204dp"
-            android:layout_height="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="info"
-            android:id="@+id/listfulInfo" />
+            android:id="@+id/listfulInfo"
+            android:layout_gravity="left" />
     </LinearLayout>
 
 </LinearLayout>

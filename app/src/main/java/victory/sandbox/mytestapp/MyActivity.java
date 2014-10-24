@@ -152,8 +152,8 @@ public class MyActivity extends Activity {
             TextView info = (TextView) view.findViewById(R.id.listfulInfo);
             ImageView img = (ImageView) view.findViewById(R.id.infoImg);
             img.setImageURI(currentItem.getImgUri());
-            name.setText("Your Name: " + currentItem.getName());
-            info.setText("Your info: " + currentItem.getInfo());
+            name.setText(currentItem.getName());
+            info.setText(currentItem.getInfo());
 
             return view;
         }
