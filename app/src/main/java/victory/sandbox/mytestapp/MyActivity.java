@@ -53,10 +53,7 @@ public class MyActivity extends Activity {
                     isFirstTabClick = false;
                     return;
                 }
-                Toast.makeText(
-                        getApplicationContext(),
-                        "you clicked tab " + tabId,
-                        Toast.LENGTH_SHORT).show();
+
             }
         });
 
