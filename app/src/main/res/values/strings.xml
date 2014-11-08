@@ -2,13 +2,5 @@
 <resources>
 
     <string name="app_name">My Test App</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="clickToDoBtn">Click To Do</string>
-    <string name="clickToDo">Click To Do</string>
-    <string name="iLikeToClick">I like to click</string>
-    <string name="letsToast">letsToast</string>
-    <string name="title_of_game">Click My World</string>
-    <string name="firstTab">Large Text</string>
-    <string name="secondTabText">List of Peoples</string>
 </resources>
