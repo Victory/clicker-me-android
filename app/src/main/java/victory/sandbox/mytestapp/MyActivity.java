@@ -25,10 +25,15 @@ import java.util.List;
 
 public class MyActivity extends Activity {
 
+    Button clickToList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+
+        clickToList = (Button) findViewById(R.id.clickToList);
+
     }
 
     @Override
