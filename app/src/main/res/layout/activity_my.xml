@@ -20,6 +20,11 @@
             android:text="@string/clickToList"
             android:id="@+id/clickToList"
             android:layout_gravity="center_horizontal" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="694dp"
+            android:id="@+id/listView" />
     </LinearLayout>
 
 </RelativeLayout>

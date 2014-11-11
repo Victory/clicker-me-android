@@ -1,31 +1,23 @@
 package victory.sandbox.mytestapp;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TabHost;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MyActivity extends Activity {
 
     Button clickToList;
+    ListView myListView;
+    private ArrayAdapter<String> adapter;
+    private ArrayList<String> arrayList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +25,29 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_my);
 
         clickToList = (Button) findViewById(R.id.clickToList);
+        myListView = (ListView) findViewById(R.id.listView);
+
+
+        arrayList = new ArrayList<String>();
+
+        adapter = new ArrayAdapter<String>(
+                getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
+
+        myListView.setAdapter(adapter);
+
+        clickToList.setOnClickListener(new View.OnClickListener() {
+            private Integer counter = 0;
+
+            @Override
+            public void onClick(View v) {
+                arrayList.add("Some Cool String " + counter.toString());
+                counter += 1;
+                adapter.notifyDataSetChanged();
+                myListView.setBackgroundColor(
+                        getResources().getColor(android.R.color.background_dark));
+            }
+        });
+
 
     }
 
