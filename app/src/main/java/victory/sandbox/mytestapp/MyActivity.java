@@ -31,7 +31,10 @@ public class MyActivity extends Activity {
         arrayList = new ArrayList<String>();
 
         adapter = new ArrayAdapter<String>(
-                getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
+                getApplicationContext(),
+                R.layout.list_layout,
+                R.id.listTextView,
+                arrayList);
 
         myListView.setAdapter(adapter);
 
@@ -45,6 +48,7 @@ public class MyActivity extends Activity {
                 adapter.notifyDataSetChanged();
                 myListView.setBackgroundColor(
                         getResources().getColor(android.R.color.background_dark));
+
             }
         });
 
