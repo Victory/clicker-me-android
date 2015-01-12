@@ -17,6 +17,7 @@ public class MyActivity extends Activity {
     ListView myListView;
     private ArrayAdapter<String> adapter;
     private ArrayList<String> arrayList;
+    private int maxClicks = 5;
 
 
     @Override
@@ -43,6 +44,9 @@ public class MyActivity extends Activity {
 
             @Override
             public void onClick(View v) {
+                if (counter >= maxClicks) {
+                    return;
+                }
                 arrayList.add("Some Cool String " + counter.toString());
                 counter += 1;
                 adapter.notifyDataSetChanged();
