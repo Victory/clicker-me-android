@@ -17,7 +17,6 @@ public class MyActivity extends Activity {
     ListView myListView;
     private ArrayAdapter<String> adapter;
     private ArrayList<String> arrayList;
-    private int maxClicks = 5;
 
 
     @Override
@@ -41,6 +40,7 @@ public class MyActivity extends Activity {
 
         clickToList.setOnClickListener(new View.OnClickListener() {
             private Integer counter = 0;
+            private int maxClicks = 50;
 
             @Override
             public void onClick(View v) {
