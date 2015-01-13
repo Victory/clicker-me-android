@@ -47,7 +47,7 @@ public class MyActivity extends Activity {
                 if (counter >= maxClicks) {
                     return;
                 }
-                arrayList.add("Some Cool String " + counter.toString());
+                arrayList.add("Row: " + counter.toString());
                 counter += 1;
                 adapter.notifyDataSetChanged();
                 myListView.setBackgroundColor(
