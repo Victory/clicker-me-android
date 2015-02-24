@@ -24,11 +24,10 @@
         <ListView
             android:textAlignment="center"
             android:layout_width="wrap_content"
-            android:layout_height="694dp"
+            android:layout_height="300dp"
             android:id="@+id/listView"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbars="vertical"
-            android:scrollbarSize="50dp"
             android:fadeScrollbars="false"
             />
 
