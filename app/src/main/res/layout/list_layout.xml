@@ -14,21 +14,31 @@
 
         />
 
-    <TextView
-        android:id="@+id/nextLineText"
-        android:layout_width="130dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="text on the next line"
+        android:weightSum="4"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/listTextView"
-        />
+        >
+        <TextView
+            android:id="@+id/nextLineText"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="text on the next line"
 
-    <TextView
-        android:id="@+id/nextLineLeftText"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/listTextView"
-        android:layout_alignParentRight="true"
-        android:text="trailing text"/>
+
+            />
+
+        <TextView
+            android:id="@+id/nextLineLeftText"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="trailing text"/>
+    </LinearLayout>
+
+
 
 </RelativeLayout>
