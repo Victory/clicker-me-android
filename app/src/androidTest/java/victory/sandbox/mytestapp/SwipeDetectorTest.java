@@ -18,12 +18,12 @@ public class SwipeDetectorTest extends TestCase {
     public void setUp() throws Exception {
         super.setUp();
 
-        class MyMockContect extends MockContext {
+        class MyMockContext extends MockContext {
             public Looper getMainLooper() {
                 return Looper.getMainLooper();
             }
         }
-        MyMockContect context = new MyMockContect();
+        MyMockContext context = new MyMockContext();
         x = 0; y = 0;
         mockView = new ViewStub(context);
         swipeDetector = new SwipeDetector();
