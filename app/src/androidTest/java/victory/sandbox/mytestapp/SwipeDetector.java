@@ -7,9 +7,33 @@ import android.view.View;
 public class SwipeDetector implements View.OnTouchListener {
 
     public static enum Action {
+        LeftToRight,
+        RightToLeft,
+        UpToDown,
+        DownToUp,
         None,
     }
-    protected Action isSwipe = Action.None;
+
+    private static class ActionPair {
+        Action positive;
+        Action negative;
+        ActionPair (Action pos, Action neg) {
+            positive = pos;
+            negative = neg;
+        }
+    }
+
+    private static final ActionPair verticalActions =
+            new ActionPair(Action.UpToDown, Action.DownToUp);
+    private static final ActionPair horizontalActions =
+            new ActionPair(Action.LeftToRight, Action.RightToLeft);
+
+
+    protected Action swipeVertical = Action.None;
+    protected Action swipeHorizontal = Action.None;
+
+
+    private float MIN_MOTION = 10;
 
     // where the down and up action take place
     protected float downX, upX, downY, upY;
@@ -21,24 +45,63 @@ public class SwipeDetector implements View.OnTouchListener {
 
         if (action == MotionEvent.ACTION_DOWN) {
             processActionDownEvent(event);
-            isSwipe = Action.None;
         } else if (action == MotionEvent.ACTION_MOVE) {
             processActionMoveEvent(event);
         }
-        return false;
+        return !swipeHorizontal.equals(Action.None) || !swipeVertical.equals(Action.None);
+    }
+
+    public float getMinMotion() {
+        return MIN_MOTION;
+    }
+
+    public void setMinMotion(float MIN_MOTION) {
+        this.MIN_MOTION = Math.abs(MIN_MOTION);
+    }
+
+    public Action getSwipeVertical() {
+        return swipeVertical;
+    }
+
+    public Action getSwipeHorizontal() {
+        return swipeHorizontal;
     }
 
     private void processActionMoveEvent(MotionEvent event)
     {
-        /* TODO
         upX = event.getX();
         upY = event.getY();
-        */
+        float deltaX = upX - downX;
+        float deltaY = upY - downY;
+
+        processHorizontal(deltaX);
+        processVertical(deltaY);
+
+    }
+
+    private Action processDelta(float delta, ActionPair actions) {
+        if (Math.abs(delta) < getMinMotion()) {
+            return Action.None;
+        } else if (delta > 0) {
+            return actions.positive;
+        } else {
+            return actions.negative;
+        }
+    }
+
+    private void processVertical(float deltaY) {
+        swipeVertical = processDelta(deltaY, verticalActions);
+    }
+
+    private void processHorizontal(float deltaX) {
+        swipeHorizontal = processDelta(deltaX, horizontalActions);
     }
 
     private void processActionDownEvent (MotionEvent event)
     {
         downX = event.getX();
         downY = event.getY();
+        swipeVertical = Action.None;
+        swipeHorizontal = Action.None;
     }
 }
