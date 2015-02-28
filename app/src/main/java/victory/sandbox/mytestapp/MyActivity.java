@@ -22,30 +22,6 @@ public class MyActivity extends Activity {
 
     private int swipeNumber;
 
-    private class SwipeItemClickListener implements AdapterView.OnItemClickListener {
-        private SwipeDetector swipeDetector = null;
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if (swipeDetector == null) {
-                return;
-            }
-            swipeDetector.getSwipeHorizontal();
-
-            if (swipeDetector.isLeftToRight()) {
-                view.getResources().getColor(android.R.color.holo_blue_bright);
-            }
-        }
-
-        public void setSwipeDetector(SwipeDetector swipeDetector) {
-            this.swipeDetector = swipeDetector;
-        }
-
-        public SwipeDetector getSwipeDetector () {
-            return swipeDetector;
-        }
-    }
-
     private class SwipeItemTouchListener extends SwipeDetector {
         @Override
         public boolean onTouch(View view, MotionEvent event) {
@@ -67,11 +43,7 @@ public class MyActivity extends Activity {
         clickToList = (Button) findViewById(R.id.clickToList);
         myListView = (ListView) findViewById(R.id.listView);
 
-        SwipeItemClickListener swipeListener = new SwipeItemClickListener();
-        swipeListener.setSwipeDetector(new SwipeItemTouchListener());
-
-        myListView.setOnItemClickListener(swipeListener);
-        myListView.setOnTouchListener(swipeListener.getSwipeDetector());
+        myListView.setOnTouchListener(new SwipeItemTouchListener());
 
         arrayList = new ArrayList<String>();
 
