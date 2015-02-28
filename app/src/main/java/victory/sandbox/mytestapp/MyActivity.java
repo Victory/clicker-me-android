@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,7 +20,9 @@ public class MyActivity extends Activity {
     private ArrayAdapter<String> adapter;
     private ArrayList<String> arrayList;
 
-    private class SwipeListener implements AdapterView.OnItemClickListener {
+    private int swipeNumber;
+
+    private class SwipeItemClickListener implements AdapterView.OnItemClickListener {
         private SwipeDetector swipeDetector = null;
 
         @Override
@@ -28,6 +31,10 @@ public class MyActivity extends Activity {
                 return;
             }
             swipeDetector.getSwipeHorizontal();
+
+            if (swipeDetector.isLeftToRight()) {
+                view.getResources().getColor(android.R.color.holo_blue_bright);
+            }
         }
 
         public void setSwipeDetector(SwipeDetector swipeDetector) {
@@ -39,6 +46,18 @@ public class MyActivity extends Activity {
         }
     }
 
+    private class SwipeItemTouchListener extends SwipeDetector {
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+            boolean result = super.onTouch(view, event);
+
+            if (isLeftToRight()) {
+                swipeNumber += 1;
+            }
+
+            return result;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +67,8 @@ public class MyActivity extends Activity {
         clickToList = (Button) findViewById(R.id.clickToList);
         myListView = (ListView) findViewById(R.id.listView);
 
-        SwipeListener swipeListener = new SwipeListener();
-        swipeListener.setSwipeDetector(new SwipeDetector());
+        SwipeItemClickListener swipeListener = new SwipeItemClickListener();
+        swipeListener.setSwipeDetector(new SwipeItemTouchListener());
 
         myListView.setOnItemClickListener(swipeListener);
         myListView.setOnTouchListener(swipeListener.getSwipeDetector());
@@ -73,7 +92,7 @@ public class MyActivity extends Activity {
                 if (counter >= maxClicks) {
                     return;
                 }
-                arrayList.add("Row: " + counter.toString());
+                arrayList.add("Row: " + counter.toString() + " Swipe Number: " + swipeNumber);
                 counter += 1;
                 adapter.notifyDataSetChanged();
                 myListView.setBackgroundColor(
