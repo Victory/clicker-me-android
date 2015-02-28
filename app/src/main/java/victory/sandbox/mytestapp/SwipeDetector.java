@@ -67,6 +67,23 @@ public class SwipeDetector implements View.OnTouchListener {
         return swipeHorizontal;
     }
 
+    public boolean isRightToLeft () {
+        return swipeHorizontal.equals(Action.RightToLeft);
+    }
+
+    public boolean isLeftToRight () {
+        return swipeHorizontal.equals(Action.LeftToRight);
+    }
+
+    public boolean isUpToDown () {
+        return swipeVertical.equals(Action.UpToDown);
+    }
+
+    public  boolean isDownToUp () {
+        return swipeVertical.equals(Action.DownToUp);
+    }
+
+
     private void processActionMoveEvent(MotionEvent event)
     {
         upX = event.getX();
