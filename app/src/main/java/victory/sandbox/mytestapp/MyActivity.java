@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -18,6 +19,26 @@ public class MyActivity extends Activity {
     private ArrayAdapter<String> adapter;
     private ArrayList<String> arrayList;
 
+    private class SwipeListener implements AdapterView.OnItemClickListener {
+        private SwipeDetector swipeDetector = null;
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (swipeDetector == null) {
+                return;
+            }
+            swipeDetector.getSwipeHorizontal();
+        }
+
+        public void setSwipeDetector(SwipeDetector swipeDetector) {
+            this.swipeDetector = swipeDetector;
+        }
+
+        public SwipeDetector getSwipeDetector () {
+            return swipeDetector;
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +48,11 @@ public class MyActivity extends Activity {
         clickToList = (Button) findViewById(R.id.clickToList);
         myListView = (ListView) findViewById(R.id.listView);
 
+        SwipeListener swipeListener = new SwipeListener();
+        swipeListener.setSwipeDetector(new SwipeDetector());
+
+        myListView.setOnItemClickListener(swipeListener);
+        myListView.setOnTouchListener(swipeListener.getSwipeDetector());
 
         arrayList = new ArrayList<String>();
 
