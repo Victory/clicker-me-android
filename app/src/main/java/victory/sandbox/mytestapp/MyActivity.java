@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -25,6 +24,7 @@ public class MyActivity extends Activity {
     private class SwipeItemTouchListener extends SwipeDetector {
         private long minTime = 0;
         private int debounceLength = 500;
+        private SwipeDetector.Action lastAction = Action.None;
 
         private boolean isBounce () {
             long toc = System.currentTimeMillis();
@@ -45,8 +45,11 @@ public class MyActivity extends Activity {
             boolean result = super.onTouch(view, event);
 
             if (isLeftToRight() && !isBounce()) {
-                swipeNumber += 1;
+                if (lastAction.equals(Action.None)) {
+                    swipeNumber += 1;
+                }
             }
+            lastAction = swipeHorizontal;
 
             return result;
         }
