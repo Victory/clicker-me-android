@@ -42,7 +42,7 @@ public class MyActivity extends Activity {
 
         @Override
         public boolean onTouch(View view, MotionEvent event) {
-            boolean result = super.onTouch(view, event);
+            super.onTouch(view, event);
 
             if (isLeftToRight() && !isBounce()) {
                 if (lastAction.equals(Action.None)) {
@@ -51,7 +51,7 @@ public class MyActivity extends Activity {
             }
             lastAction = swipeHorizontal;
 
-            return result;
+            return false;
         }
     }
 
