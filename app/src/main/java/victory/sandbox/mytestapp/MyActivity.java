@@ -23,11 +23,28 @@ public class MyActivity extends Activity {
     private int swipeNumber;
 
     private class SwipeItemTouchListener extends SwipeDetector {
+        private long minTime = 0;
+        private int debounceLength = 500;
+
+        private boolean isBounce () {
+            long toc = System.currentTimeMillis();
+            boolean result;
+
+            if (toc < minTime) { // too soon
+                result = true;
+            } else {
+                minTime = toc + debounceLength;
+                result = false;
+            }
+
+            return result;
+        }
+
         @Override
         public boolean onTouch(View view, MotionEvent event) {
             boolean result = super.onTouch(view, event);
 
-            if (isLeftToRight()) {
+            if (isLeftToRight() && !isBounce()) {
                 swipeNumber += 1;
             }
 
