@@ -16,8 +16,8 @@ public class MyActivity extends Activity {
 
     Button clickToList;
     ListView myListView;
-    private ArrayAdapter<String> adapter;
-    private ArrayList<String> arrayList;
+    private ArrayAdapter<ListItemModel> modelAdapter;
+    private ArrayList<ListItemModel> modelList;
 
     private int swipeNumber;
 
@@ -65,24 +65,26 @@ public class MyActivity extends Activity {
 
         myListView.setOnTouchListener(new SwipeItemTouchListener());
 
-        arrayList = new ArrayList<String>();
-
-        adapter = new ArrayAdapter<String>(
+        modelList = new ArrayList<ListItemModel>();
+        modelAdapter = new ArrayAdapter<ListItemModel>(
                 getApplicationContext(),
                 R.layout.list_layout,
                 R.id.listTextView,
-                arrayList);
-
-        myListView.setAdapter(adapter);
+                modelList
+        );
+        myListView.setAdapter(modelAdapter);
 
         clickToList.setOnClickListener(new View.OnClickListener() {
             Integer counter = 1;
 
             @Override
             public void onClick(View v) {
-                arrayList.add("Row: " + counter.toString() + " Swipe Number: " + swipeNumber);
+                ListItemModel model = new ListItemModel(
+                        "Row: " + counter.toString() + " Swipe Number: " + swipeNumber);
+                modelList.add(model);
                 counter += 1;
-                adapter.notifyDataSetChanged();
+                modelAdapter.notifyDataSetChanged();
+
                 myListView.setBackgroundColor(
                         getResources().getColor(android.R.color.background_dark));
             }
