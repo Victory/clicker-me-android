@@ -76,24 +76,17 @@ public class MyActivity extends Activity {
         myListView.setAdapter(adapter);
 
         clickToList.setOnClickListener(new View.OnClickListener() {
-            private Integer counter = 0;
-            private int maxClicks = 50;
+            Integer counter = 1;
 
             @Override
             public void onClick(View v) {
-                if (counter >= maxClicks) {
-                    return;
-                }
                 arrayList.add("Row: " + counter.toString() + " Swipe Number: " + swipeNumber);
                 counter += 1;
                 adapter.notifyDataSetChanged();
                 myListView.setBackgroundColor(
                         getResources().getColor(android.R.color.background_dark));
-
             }
         });
-
-
     }
 
     @Override
