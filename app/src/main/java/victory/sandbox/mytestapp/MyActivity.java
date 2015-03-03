@@ -66,7 +66,7 @@ public class MyActivity extends Activity {
         myListView.setOnTouchListener(new SwipeItemTouchListener());
 
         modelList = new ArrayList<ListItemModel>();
-        modelAdapter = new ArrayAdapter<ListItemModel>(
+        modelAdapter = new ModelListAdapter (
                 getApplicationContext(),
                 R.layout.list_layout,
                 R.id.listTextView,
