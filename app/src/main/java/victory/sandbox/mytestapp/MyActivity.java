@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -18,12 +19,13 @@ public class MyActivity extends Activity {
     ListView myListView;
     private ArrayAdapter<ListItemModel> modelAdapter;
     private ArrayList<ListItemModel> modelList;
+    private int lastClickedItem;
 
     private int swipeNumber;
 
     private class SwipeItemTouchListener extends SwipeDetector {
         private long minTime = 0;
-        private int debounceLength = 500;
+        private int debounceLength = 50;
         private SwipeDetector.Action lastAction = Action.None;
 
         private boolean isBounce () {
@@ -44,11 +46,15 @@ public class MyActivity extends Activity {
         public boolean onTouch(View view, MotionEvent event) {
             super.onTouch(view, event);
 
-            if (isLeftToRight() && !isBounce()) {
+            //if (!isBounce() && isLeftToRight()) {
                 if (lastAction.equals(Action.None)) {
+                    ListItemModel item = modelAdapter.getItem(lastClickedItem);
+                    item.setMain("swiped");
+                    modelAdapter.notifyDataSetChanged();
+                    view.setBackgroundColor(0xffff0000);
                     swipeNumber += 1;
                 }
-            }
+            //}
             lastAction = swipeHorizontal;
 
             return false;
@@ -62,16 +68,26 @@ public class MyActivity extends Activity {
 
         clickToList = (Button) findViewById(R.id.clickToList);
         myListView = (ListView) findViewById(R.id.listView);
+        myListView.setTag("theWholeList");
 
-        myListView.setOnTouchListener(new SwipeItemTouchListener());
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                lastClickedItem = position;
+            }
+        });
 
+        
+        
         modelList = new ArrayList<ListItemModel>();
         modelAdapter = new ModelListAdapter (
-                getApplicationContext(),
+                this,
                 R.layout.list_layout,
                 R.id.listTextView,
-                modelList
+                modelList,
+                new SwipeItemTouchListener()
         );
+
         myListView.setAdapter(modelAdapter);
 
         clickToList.setOnClickListener(new View.OnClickListener() {
