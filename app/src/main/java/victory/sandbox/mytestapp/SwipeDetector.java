@@ -33,7 +33,7 @@ public class SwipeDetector implements View.OnTouchListener {
     protected Action swipeHorizontal = Action.None;
 
 
-    private float MIN_MOTION = 10;
+    private float MIN_MOTION = 30;
 
     // where the down and up action take place
     protected float downX, upX, downY, upY;

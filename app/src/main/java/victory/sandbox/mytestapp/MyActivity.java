@@ -2,11 +2,11 @@ package victory.sandbox.mytestapp;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -46,18 +46,23 @@ public class MyActivity extends Activity {
         public boolean onTouch(View view, MotionEvent event) {
             super.onTouch(view, event);
 
-            //if (!isBounce() && isLeftToRight()) {
-                if (lastAction.equals(Action.None)) {
-                    ListItemModel item = modelAdapter.getItem(lastClickedItem);
-                    item.setMain("swiped");
-                    modelAdapter.notifyDataSetChanged();
-                    view.setBackgroundColor(0xffff0000);
-                    swipeNumber += 1;
-                }
-            //}
-            lastAction = swipeHorizontal;
+            Log.d("TOUCH", ""+view.getTag());
 
-            return false;
+            if (isLeftToRight() && !isBounce()) {
+                if (lastAction.equals(Action.None)) {
+                    lastClickedItem = (Integer) view.getTag();
+                    ListItemModel item = modelAdapter.getItem(lastClickedItem);
+                    modelAdapter.remove(item);
+                    modelAdapter.notifyDataSetChanged();
+                    swipeNumber += 1;
+                    lastAction = swipeHorizontal;
+                }
+                return false;
+            }
+            lastAction = Action.None;
+
+            return true;
+
         }
     }
 
@@ -70,12 +75,6 @@ public class MyActivity extends Activity {
         myListView = (ListView) findViewById(R.id.listView);
         myListView.setTag("theWholeList");
 
-        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                lastClickedItem = position;
-            }
-        });
 
         
         
@@ -87,6 +86,13 @@ public class MyActivity extends Activity {
                 modelList,
                 new SwipeItemTouchListener()
         );
+
+        myListView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
 
         myListView.setAdapter(modelAdapter);
 
