@@ -44,11 +44,19 @@ public class MyActivity extends Activity {
 
         @Override
         public boolean onTouch(View view, MotionEvent event) {
+
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                view.setPadding(0, 0, 0, 0);
+                return false;
+            }
             super.onTouch(view, event);
 
-            Log.d("TOUCH", ""+view.getTag());
 
+            Log.d("TOUCH", ""+view.getTag());
+            int swipeX = (int) Math.floor(event.getX());
+            view.setPadding(swipeX, 0, 0, 0);
             if (isLeftToRight() && !isBounce()) {
+
                 if (lastAction.equals(Action.None)) {
                     lastClickedItem = (Integer) view.getTag();
                     ListItemModel item = modelAdapter.getItem(lastClickedItem);
@@ -59,10 +67,9 @@ public class MyActivity extends Activity {
                 }
                 return false;
             }
+
             lastAction = Action.None;
-
             return true;
-
         }
     }
 
@@ -73,11 +80,7 @@ public class MyActivity extends Activity {
 
         clickToList = (Button) findViewById(R.id.clickToList);
         myListView = (ListView) findViewById(R.id.listView);
-        myListView.setTag("theWholeList");
 
-
-        
-        
         modelList = new ArrayList<ListItemModel>();
         modelAdapter = new ModelListAdapter (
                 this,
