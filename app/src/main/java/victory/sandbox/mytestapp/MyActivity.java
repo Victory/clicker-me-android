@@ -44,15 +44,12 @@ public class MyActivity extends Activity {
 
         @Override
         public boolean onTouch(View view, MotionEvent event) {
+            super.onTouch(view, event);
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 view.setBackgroundColor(view.getResources().getColor(R.color.black));
-
                 view.setPadding(0, 0, 0, 0);
-                return false;
             }
-            super.onTouch(view, event);
-
 
             Log.d("TOUCH", ""+view.getTag());
             int swipeX = (int) Math.floor(event.getX());
@@ -61,8 +58,8 @@ public class MyActivity extends Activity {
             if (Math.abs(deltaX) > 20) {
                 view.setBackgroundColor(view.getResources().getColor(R.color.warning));
             }
-            if (isLeftToRight() && !isBounce()) {
 
+            if (isLeftToRight() && !isBounce()) {
                 if (lastAction.equals(Action.None)) {
                     lastClickedItem = (Integer) view.getTag();
                     ListItemModel item = modelAdapter.getItem(lastClickedItem);
@@ -71,7 +68,7 @@ public class MyActivity extends Activity {
                     swipeNumber += 1;
                     lastAction = swipeHorizontal;
                 }
-                return false;
+                return true;
             }
 
             lastAction = Action.None;
