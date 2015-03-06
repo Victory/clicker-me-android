@@ -46,6 +46,8 @@ public class MyActivity extends Activity {
         public boolean onTouch(View view, MotionEvent event) {
 
             if (event.getAction() == MotionEvent.ACTION_UP) {
+                view.setBackgroundColor(view.getResources().getColor(R.color.black));
+
                 view.setPadding(0, 0, 0, 0);
                 return false;
             }
@@ -55,6 +57,10 @@ public class MyActivity extends Activity {
             Log.d("TOUCH", ""+view.getTag());
             int swipeX = (int) Math.floor(event.getX());
             view.setPadding(swipeX, 0, 0, 0);
+
+            if (Math.abs(deltaX) > 20) {
+                view.setBackgroundColor(view.getResources().getColor(R.color.warning));
+            }
             if (isLeftToRight() && !isBounce()) {
 
                 if (lastAction.equals(Action.None)) {

@@ -36,7 +36,7 @@ public class SwipeDetector implements View.OnTouchListener {
     private float MIN_MOTION = 30;
 
     // where the down and up action take place
-    protected float downX, upX, downY, upY;
+    protected float downX, upX, downY, upY, deltaX, deltaY;
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -88,8 +88,8 @@ public class SwipeDetector implements View.OnTouchListener {
     {
         upX = event.getX();
         upY = event.getY();
-        float deltaX = upX - downX;
-        float deltaY = upY - downY;
+        deltaX = upX - downX;
+        deltaY = upY - downY;
 
         processHorizontal(deltaX);
         processVertical(deltaY);
