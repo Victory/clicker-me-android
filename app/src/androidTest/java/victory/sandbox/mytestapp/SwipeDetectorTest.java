@@ -29,17 +29,57 @@ public class SwipeDetectorTest extends TestCase {
         swipeDetector = new SwipeDetector();
     }
 
-    public void tearDown() throws Exception {
+    public void testHorizontal() throws Exception {
+
+        // run a RightToLeft Swipe
+        x = (int) swipeDetector.getMinMotion();
+        y = 0;
+        event = MotionEvent.obtain(1, 0, MotionEvent.ACTION_DOWN, x, y, 0);
+        assertFalse(swipeDetector.onTouch(mockView, event));
+        x = 0; y = 0;
+        event = MotionEvent.obtain(1, 0, MotionEvent.ACTION_MOVE, x, y, 0);
+        boolean isAction = swipeDetector.onTouch(mockView, event);
+        assertTrue(isAction);
+        boolean result = swipeDetector.getSwipeHorizontal().equals(SwipeDetector.Action.RightToLeft);
+        assertTrue(result);
+
+        // run a too small swipe
+        x = 0; y = 0;
+        event = MotionEvent.obtain(1, 0, MotionEvent.ACTION_DOWN, x, y, 0);
+        isAction = swipeDetector.onTouch(mockView, event);
+        assertFalse(isAction);
+
+        x = (int) swipeDetector.getMinMotion() - 1;
+        y = 0;
+        event = MotionEvent.obtain(1, 0, MotionEvent.ACTION_MOVE, x, y, 0);
+        isAction = swipeDetector.onTouch(mockView, event);
+        assertFalse(isAction);
+
+        // run LeftToRight
+        x = 0; y = 0;
+        event = MotionEvent.obtain(1, 0, MotionEvent.ACTION_DOWN, x, y, 0);
+        isAction = swipeDetector.onTouch(mockView, event);
+        assertFalse(isAction);
+        x = (int) swipeDetector.getMinMotion();
+        y = 0;
+        event = MotionEvent.obtain(1, 0, MotionEvent.ACTION_MOVE, x, y, 0);
+        isAction = swipeDetector.onTouch(mockView, event);
+        assertTrue(isAction);
+        result = swipeDetector.getSwipeHorizontal().equals(SwipeDetector.Action.LeftToRight);
+        assertTrue(result);
+
+
+
 
     }
+
 
     public void testOnTouch() throws Exception {
         x = 0; y = 0;
         event = MotionEvent.obtain(1, 0, MotionEvent.ACTION_DOWN, x, y, 0);
         assertFalse(swipeDetector.onTouch(mockView, event));
 
-        x = 30;
-        y = 0;
+        x = 30; y = 0;
         event = MotionEvent.obtain(1, 1, MotionEvent.ACTION_MOVE, x, y, 0);
 
         boolean isAction = swipeDetector.onTouch(mockView, event);
