@@ -2,4 +2,5 @@
 <resources>
     <color name="warning">#FFAAFF</color>
     <color name="black">#000000</color>
+    <color name="wow">#00ff00</color>
 </resources>

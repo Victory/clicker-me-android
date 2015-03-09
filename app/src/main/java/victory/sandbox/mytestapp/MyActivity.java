@@ -25,7 +25,7 @@ public class MyActivity extends Activity {
 
     private class SwipeItemTouchListener extends SwipeDetector {
         private long minTime = 0;
-        private int debounceLength = 50;
+        private int debounceLength = 150;
         private SwipeDetector.Action lastAction = Action.None;
 
         private boolean isBounce () {
@@ -44,29 +44,45 @@ public class MyActivity extends Activity {
 
         @Override
         public boolean onTouch(View view, MotionEvent event) {
-            super.onTouch(view, event);
-
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                view.setBackgroundColor(view.getResources().getColor(R.color.black));
-                view.setPadding(0, 0, 0, 0);
+            if (event.getAction() != MotionEvent.ACTION_DOWN &&
+                    event.getAction() != MotionEvent.ACTION_MOVE) {
+                view.setBackgroundColor(view.getResources().getColor(R.color.wow));
             }
 
+            if (lastAction.equals(Action.LeftToRight)) {
+                view.setBackgroundColor(view.getResources().getColor(R.color.black));
+                if (event.getAction() != MotionEvent.ACTION_DOWN) {
+                    return false;
+                }
+            }
+            super.onTouch(view, event);
+
             Log.d("TOUCH", ""+view.getTag());
-            int swipeX = (int) Math.floor(event.getX());
-            view.setPadding(swipeX, 0, 0, 0);
+
 
             if (Math.abs(deltaX) > 20) {
                 view.setBackgroundColor(view.getResources().getColor(R.color.warning));
             }
 
-            if (isLeftToRight() && !isBounce()) {
+            view.setPadding((int) deltaX, 0, 0, 0);
+
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                view.setBackgroundColor(view.getResources().getColor(R.color.black));
+                view.setPadding(0, 0, 0, 0);
+                return false;
+            }
+
+            if (isLeftToRight()) {
                 if (lastAction.equals(Action.None)) {
                     lastClickedItem = (Integer) view.getTag();
+                    Log.d("LASTCLICKED", ""+view.getTag());
                     ListItemModel item = modelAdapter.getItem(lastClickedItem);
+                    Log.d("CLICKTEXT", item.getMain());
                     modelAdapter.remove(item);
                     modelAdapter.notifyDataSetChanged();
                     swipeNumber += 1;
                     lastAction = swipeHorizontal;
+                    minTime = System.currentTimeMillis() + 1500;
                 }
                 return true;
             }
