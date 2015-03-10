@@ -44,6 +44,8 @@ public class MyActivity extends Activity {
 
         @Override
         public boolean onTouch(View view, MotionEvent event) {
+
+            // debuging
             if (event.getAction() != MotionEvent.ACTION_DOWN &&
                     event.getAction() != MotionEvent.ACTION_MOVE) {
                 view.setBackgroundColor(view.getResources().getColor(R.color.wow));
@@ -56,9 +58,6 @@ public class MyActivity extends Activity {
                 }
             }
             super.onTouch(view, event);
-
-            Log.d("TOUCH", ""+view.getTag());
-
 
             if (Math.abs(deltaX) > 20) {
                 view.setBackgroundColor(view.getResources().getColor(R.color.warning));
@@ -75,9 +74,7 @@ public class MyActivity extends Activity {
             if (isLeftToRight()) {
                 if (lastAction.equals(Action.None)) {
                     lastClickedItem = (Integer) view.getTag();
-                    Log.d("LASTCLICKED", ""+view.getTag());
                     ListItemModel item = modelAdapter.getItem(lastClickedItem);
-                    Log.d("CLICKTEXT", item.getMain());
                     modelAdapter.remove(item);
                     modelAdapter.notifyDataSetChanged();
                     swipeNumber += 1;
