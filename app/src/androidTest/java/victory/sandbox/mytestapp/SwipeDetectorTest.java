@@ -103,7 +103,7 @@ public class SwipeDetectorTest extends TestCase {
         event = MotionEvent.obtain(1, 0, MotionEvent.ACTION_DOWN, x, y, 0);
         assertFalse(swipeDetector.onTouch(mockView, event));
 
-        x = 30; y = 0;
+        x = 90; y = 0;
         event = MotionEvent.obtain(1, 1, MotionEvent.ACTION_MOVE, x, y, 0);
 
         boolean isAction = swipeDetector.onTouch(mockView, event);
@@ -121,7 +121,7 @@ public class SwipeDetectorTest extends TestCase {
         x = 0; y = 0;
         event = MotionEvent.obtain(1, 0, MotionEvent.ACTION_DOWN, x, y, 0);
         swipeDetector.onTouch(mockView, event);
-        x = 0; y = 30;
+        x = 0; y = 90;
         event = MotionEvent.obtain(1, 0, MotionEvent.ACTION_MOVE, x, y, 0);
         isAction = swipeDetector.onTouch(mockView, event);
         assertTrue(isAction);

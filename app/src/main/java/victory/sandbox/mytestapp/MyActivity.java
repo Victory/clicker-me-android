@@ -44,7 +44,6 @@ public class MyActivity extends Activity {
 
         @Override
         public boolean onTouch(View view, MotionEvent event) {
-
             // debuging
             if (event.getAction() != MotionEvent.ACTION_DOWN &&
                     event.getAction() != MotionEvent.ACTION_MOVE) {
