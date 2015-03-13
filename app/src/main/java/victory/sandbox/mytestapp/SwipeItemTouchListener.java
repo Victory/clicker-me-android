@@ -39,21 +39,6 @@ class SwipeItemTouchListener extends SwipeDetector {
 
     @Override
     public boolean onTouch(View view, MotionEvent event) {
-        // debuging
-        if (event.getAction() != MotionEvent.ACTION_DOWN &&
-                event.getAction() != MotionEvent.ACTION_MOVE) {
-            view.setBackgroundColor(view.getResources().getColor(R.color.wow));
-            if (isBounce()) {
-                Log.d("BOUNCE", "true");
-            }
-        }
-
-        if (lastAction.equals(Action.LeftToRight)) {
-            view.setBackgroundColor(view.getResources().getColor(R.color.black));
-            if (event.getAction() != MotionEvent.ACTION_DOWN) {
-                return false;
-            }
-        }
         super.onTouch(view, event);
 
         if (Math.abs(deltaX) > 20) {
@@ -61,12 +46,6 @@ class SwipeItemTouchListener extends SwipeDetector {
         }
 
         view.setPadding((int) deltaX, 0, 0, 0);
-
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            view.setBackgroundColor(view.getResources().getColor(R.color.black));
-            view.setPadding(0, 0, 0, 0);
-            return false;
-        }
 
         if (isLeftToRight()) {
             if (lastAction.equals(Action.None)) {

@@ -44,15 +44,13 @@ public class SwipeDetector implements View.OnTouchListener {
         int action = event.getAction();
 
         if (action == MotionEvent.ACTION_DOWN) {
+            deltaX = deltaY = 0;
             processActionDownEvent(event);
-        } else if (action == MotionEvent.ACTION_MOVE) {
+        } else if (action == MotionEvent.ACTION_UP) {
             processActionMoveEvent(event);
         }
         boolean isSwipe = !swipeHorizontal.equals(Action.None) || !swipeVertical.equals(Action.None);
 
-        if (isSwipe) {
-            deltaX = deltaY = 0;
-        }
         return isSwipe;
     }
 
